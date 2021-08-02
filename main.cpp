@@ -1,12 +1,10 @@
 #include <iostream>
 #include <vector>
-#include <string>
 using namespace std;
 
 vector<int> decToBinary(int n)
 {
-    int binaryNum[32];
-
+    int binaryNum[32]; for (int & i : binaryNum) i = 0;
     vector<int> result;
 
     int i = 0;
@@ -24,11 +22,8 @@ vector<int> decToBinary(int n)
 }
 
 int main() {
-    vector<int> coins;
-    vector<int> table;
-    vector<int> start_position;
-    vector<int> wanted = {1,0,1,0,1,0,1,0,1,0};
-    string str_bin;
+    vector<int> coins, table, start_position;
+    vector<int> wanted = {1,0,1,0,1,0,1,0,1,0}; //Enter here what combinations you want to achieve
 
     for (int i = 0; i < 1024; ++i) {
         table.clear();
@@ -56,7 +51,6 @@ int main() {
             for (int j = 0; j < 10; ++j)
             {
                 cout << table[j] << " ";
-                str_bin += to_string(table[j]);
             }
             cout << i << "\t\t";
 
