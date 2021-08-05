@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <deque>
 using namespace std;
 
 vector<int> decToBinary(int n, unsigned int arr_size)
@@ -21,77 +22,35 @@ vector<int> decToBinary(int n, unsigned int arr_size)
     return result;
 }
 
-int main() {
+void solveHard(const vector<int> &wanted)
+{
     vector<int> coins, table, start_position;
-    vector<int> wanted = {1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0}; //Enter here what combinations you want to achieve
-
     for (int i = pow(2, wanted.size()-1); i < pow(2, wanted.size()); ++i)
     {
         table.clear();
         coins = decToBinary(i, wanted.size());
+        int onecounter = 0;
+        bool getout = false;
+        for (auto coin : coins)
+        {
+            if (coin == 1)  onecounter++;
+        }
+        if (onecounter<coins.size()-onecounter) continue;
 
         while (!coins.empty())
         {
 
-            if (table.size()==2 && table[table.size()-1] == 1)
+            for (int j = 2; j < wanted.size(); ++j) {
+                if (table.size()==j && table.back() != wanted[j-1])
+                {
+                    getout = true;
+                    break;
+                }
+            }
+            if (getout){
+                getout = false;
                 break;
-            if (table.size()==3 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==4 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==5 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==6 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==7 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==8 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==9 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==10 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==11 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==12 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==13 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==14 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==15 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==16 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==17 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==18 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==19 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==20 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==21 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==22 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==23 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==24 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==25 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==26 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==27 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==28 && table[table.size()-1] == 1)
-                break;
-            if (table.size()==29 && table[table.size()-1] == 0)
-                break;
-            if (table.size()==30 && table[table.size()-1] == 1)
-                break;
-
+            }
 
             else if (coins.size() == 2)
             {
@@ -121,8 +80,37 @@ int main() {
             for (int j : start_position)
                 cout << j << " ";
 
-
+            break;
         }
+
     }
+}
+
+void solveEasy(vector<int> &wanted)
+{
+    deque<int> deque;
+    while (!wanted.empty())
+    {
+        deque.push_front(wanted.back());
+        wanted.pop_back();
+        deque.push_front(deque.back());
+        deque.pop_back();
+    }
+    deque.push_back(deque.front());
+    deque.pop_front();
+
+    for (auto n : deque)
+    {
+        cout << n;
+    }
+    cout << endl;
+}
+int main() {
+    vector<int> wanted = {1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,}; //Enter here what combinations you want to achieve
+
+    //solveHard(wanted);
+    solveEasy(wanted);
+
+
     return 0;
 }
